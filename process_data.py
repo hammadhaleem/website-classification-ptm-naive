@@ -16,15 +16,14 @@ porter_stem = PorterStemmer()
 wordnet_tag ={'NN':'n','JJ':'a','VB':'v','RB':'r'}
 
 topics = {
-	'entertain' 	: ['ENT12','GENT','GFAS'],
+	'entertain' : ['ENT12','GENT','GFAS'],
 	'politics' 	: ['1POL','G12','GPOL'],
-	'econonics' 	: ['2ECO','E11','E12','ECAT'],
+	'econonics' : ['2ECO','E11','E12','ECAT'],
 	'sports'	: ['3SPO','GSPO'],
 	'education'	: ['G113','GEDU','C23','GSCI'],	
 	'religion'	: ['GREL'],	
 	'health'	: ['G111','GHEA'],
 	}
-
 
 print "Init"
 
