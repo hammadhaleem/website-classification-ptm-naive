@@ -43,7 +43,7 @@ def dbwrite(p,x1,x2):
 
 	x = connection.cursor()
 	try:
-		q= "INSERT INTO `data_new` (`path`,`topic`,`data`) VALUES ('"+addslashes(str(p))+"','"+addslashes(str(x1))+"','"+json.dumps(x2).replace('\'', '\\\'')+"')"
+		q= "INSERT INTO `data_new` (`path`,`topic`,`data`) VALUES ('"+addslashes(str(p))+"','"+json.dumps(x1).replace('\'', '\\\'')+"','"+json.dumps(x2).replace('\'', '\\\'')+"')"
 		x.execute(q)
 		connection.commit()
 	except Exception as e :
@@ -81,7 +81,7 @@ for path in list :
 			print "FILE ERROR" , E 
 		finally :
 			f.close()
-			os.remove(path)
+			#os.remove(path)
 			list.remove(path)
 
 		doc = lxml.html.document_fromstring(text)
