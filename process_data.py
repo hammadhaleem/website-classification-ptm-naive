@@ -1,18 +1,11 @@
 import os
-from lxml import etree
-import lxml
 import lxml.html
-import nltk
-import os
-import xml.etree.ElementTree as ET
 from nltk import PorterStemmer
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords
 from string import maketrans 
-import json
 
 import os, json, MySQLdb
-from bs4 import BeautifulSoup
 from lib.mysql import connection
 from lib.datacleaner import DataClean
 
