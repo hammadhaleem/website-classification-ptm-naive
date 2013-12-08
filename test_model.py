@@ -14,16 +14,16 @@ def update_occurences(cat, dp):
 category_counts_test= {}
 MODEL_DIR = "model/"
 
-categories = ['entertain','politics','econonics','sports','education','religion','health']
+categories = [u'entertain',u'politics',u'econonics',u'sports',u'education',u'religion',u'health']
 
 category_counts = {
-                'entertain'  :json.load(open(MODEL_DIR+"entertain.json")),
-                'politics'   :json.load(open(MODEL_DIR+"politics.json")),
-                'econonics'  :json.load(open(MODEL_DIR+"econonics.json")),
-                'sports'     :json.load(open(MODEL_DIR+"sports.json")),
-                'education'  :json.load(open(MODEL_DIR+"education.json")),
-                'religion'   :json.load(open(MODEL_DIR+"religion.json")),
-                'health'     :json.load(open(MODEL_DIR+"health.json")),
+                u'entertain'  :json.load(open(MODEL_DIR+"entertain.json")),
+                u'politics'   :json.load(open(MODEL_DIR+"politics.json")),
+                u'econonics'  :json.load(open(MODEL_DIR+"econonics.json")),
+                u'sports'     :json.load(open(MODEL_DIR+"sports.json")),
+                u'education'  :json.load(open(MODEL_DIR+"education.json")),
+                u'religion'   :json.load(open(MODEL_DIR+"religion.json")),
+                u'health'     :json.load(open(MODEL_DIR+"health.json")),
 
         }
 
@@ -36,7 +36,7 @@ query = "SELECT * FROM `data_new` WHERE `dp` <> 'Null'"
 category_counts_test = {}
 cursor.execute(query)
 rows = cursor.fetchall()
-l = [] 
+l = []
 for row in rows :
     probability = {u'entertain':1.0,u'politics':1.0,u'econonics':1.0,u'sports':1.0,u'education':1.0,u'religion':1.0,u'health':1.0}
 
@@ -61,21 +61,19 @@ for row in rows :
 
     for cat in categories:
         probability[cat] += -log(counts[cat]/sump)
-	
-    maxi= 999999
 
+    maxi= -999999
+    var = u""
     for prob in  probability :
-	if probability[prob] <= maxi :
+	if probability[prob] >= maxi :
 		maxi = probability[prob]
-		var = prob 
-    for i in cats :
-    	l.append([var , i ]) 	
-c =0.0 
-cu =1.0 
-for i in cats :
-	if i[0] == i[1] :
-		c +=1
-	cu +=1
-print  counts , category_counts_test 
-print  (c/ cu )
+		var = prob
+
+    try :
+        category_counts_test[var] +=1.0
+    except :
+        category_counts_test[var] = 1.0
+
+print  counts , category_counts_test
+
 
