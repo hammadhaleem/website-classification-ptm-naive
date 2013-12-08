@@ -8,6 +8,16 @@ from collections import OrderedDict
 ## ____Constants_____###
 
 MODEL_DIR = "model/"
+#Total in database
+data = {
+            u"econonics": 2021,
+            u"sports": 2014,
+            u"religion": 1975,
+            u"entertain": 2025,
+            u"health": 2033,
+            u"politics": 2051,
+            u"education": 2038
+    }
 
 categories = [u'entertain',u'politics',u'econonics',u'sports',u'education',u'religion',u'health']
 category_counts = {
@@ -96,7 +106,7 @@ def Test(rows): #Rows to test
             l.append([Category , i , id ] )
         if (count % 200 == 0 ):
             x =create_matrix(l)
-            print "Tested on" , count ,"Accuracy" , Get_accuracy(l) 
+            print "Tested on" , count ,"Accuracy" , Get_accuracy(l)
             f=open("choas","w")
             f.write(json.dumps(x))
             f.close()
