@@ -39,10 +39,14 @@ for row in data :
     dp = json.loads(row[4])
     count = count + 1
     print count
+    c= 0
     for cat in cats:
         print cat
+        c+=1
+    if c == 1 :
         update_occurences(categories[cat], dp)
         category_counts[cat] += 1
+
 
 for cat in categories.keys():
     f = open("model/"+cat.lower()+".json", "w")

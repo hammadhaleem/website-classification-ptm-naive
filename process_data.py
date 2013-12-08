@@ -17,9 +17,9 @@ wordnet_tag ={'NN':'n','JJ':'a','VB':'v','RB':'r'}
 
 topics = {
 	'entertain' : ['ENT12','GENT','GFAS'],
-	'politics' 	: ['1POL','G12','GPOL'],
-	'econonics' : ['2ECO','E11','E12','ECAT'],
-	'sports'	: ['3SPO','GSPO'],
+	#'politics' 	: ['1POL','G12','GPOL'],
+	#'econonics' : ['2ECO','E11','E12','ECAT'],
+	#'sports'	: ['3SPO','GSPO'],
 	'education'	: ['G113','GEDU','C23','GSCI'],	
 	'religion'	: ['GREL'],	
 	'health'	: ['G111','GHEA'],
@@ -43,7 +43,7 @@ def dbwrite(p,x1,x2):
 
 	x = connection.cursor()
 	try:
-		q= "INSERT INTO `data_new` (`path`,`topic`,`data`) VALUES ('"+addslashes(str(p))+"','"+json.dumps(x1).replace('\'', '\\\'')+"','"+json.dumps(x2).replace('\'', '\\\'')+"')"
+		q= "INSERT INTO `data_new` (`path`,`topic`,`data`) VALUES ('"+str(p)+"','"+json.dumps(x1).replace('\'', '\\\'')+"','"+json.dumps(x2).replace('\'', '\\\'')+"')"
 		x.execute(q)
 		connection.commit()
 	except Exception as e :
@@ -81,7 +81,7 @@ for path in list :
 			print "FILE ERROR" , E 
 		finally :
 			f.close()
-			#os.remove(path)
+			os.remove(path)
 			list.remove(path)
 
 		doc = lxml.html.document_fromstring(text)
@@ -111,19 +111,6 @@ for path in list :
 			print count , len(list)
 	except Exception as e :
 		print e , path ,str(count)
-	
-		
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -152,3 +139,5 @@ for path in list :
 
 
 	
+
+

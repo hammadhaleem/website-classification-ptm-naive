@@ -18,3 +18,4 @@ for row in results :
 		connection.commit()
 	except Exception as e:
 		print e
+

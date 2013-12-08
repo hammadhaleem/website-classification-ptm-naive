@@ -11,18 +11,19 @@ def update_occurences(cat, dp):
             cat[k] = v
     return cat
 
+category_counts_test= {}
 MODEL_DIR = "model/"
 
 categories = ['entertain','politics','econonics','sports','education','religion','health']
 
 category_counts = {
                 'entertain'  :json.load(open(MODEL_DIR+"entertain.json")),
-   				'politics'   :json.load(open(MODEL_DIR+"politics.json")), 
-    			'econonics'  :json.load(open(MODEL_DIR+"econonics.json")),
-    			'sports'     :json.load(open(MODEL_DIR+"sports.json")),
-    			'education'  :json.load(open(MODEL_DIR+"education.json")),
-    			'religion'   :json.load(open(MODEL_DIR+"religion.json")),
-    			'health'     :json.load(open(MODEL_DIR+"health.json")),
+                'politics'   :json.load(open(MODEL_DIR+"politics.json")),
+                'econonics'  :json.load(open(MODEL_DIR+"econonics.json")),
+                'sports'     :json.load(open(MODEL_DIR+"sports.json")),
+                'education'  :json.load(open(MODEL_DIR+"education.json")),
+                'religion'   :json.load(open(MODEL_DIR+"religion.json")),
+                'health'     :json.load(open(MODEL_DIR+"health.json")),
 
         }
 
@@ -36,7 +37,7 @@ cursor.execute(query)
 rows = cursor.fetchall()
 for row in rows :
     probability = {'entertain':1.0,'politics':1.0,'econonics':1.0,'sports':1.0,'education':1.0,'religion':1.0,'health':1.0,}
-    
+
     cats = json.loads(row[2])
     sents = json.loads(row[4])
     for words in sents:
@@ -63,14 +64,15 @@ for row in rows :
     maxi= -9999
     cats = json.loads(row[2])
     for i in probability :
-    	if (probability[i] >=  maxi) :
-    		maxi = probability[i]
-    		var = i
+        if (probability[i] >=  maxi) :
+            maxi = probability[i]
+            var = i
+    try :
+        category_counts_test[var] +=1
+    except :
+        category_counts_test[var] = 1
 
-    for i in cats :
-    	if i == var :
-    		inc = inc +1 
-    		break
-    count =count + 1
-    print (inc/count)
-    print cats
+
+print counts , category_counts_test
+
+
