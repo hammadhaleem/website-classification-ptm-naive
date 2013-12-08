@@ -22,7 +22,7 @@ topics = {
 	#'sports'	: ['3SPO','GSPO'],
 	'education'	: ['G113','GEDU','C23','GSCI'],	
 	'religion'	: ['GREL'],	
-	'health'	: ['G111','GHEA'],
+	#'health'	: ['G111','GHEA'],
 	}
 
 print "Init"

@@ -32,11 +32,13 @@ sump = sum(c for c in counts.values())*1.0
 count = 0.0
 inc = 0.0
 cursor = connection.cursor()
-query = "SELECT * FROM `data_new` WHERE `dp` <> 'Null' "
+query = "SELECT * FROM `data_new` WHERE `dp` <> 'Null'"
+category_counts_test = {}
 cursor.execute(query)
 rows = cursor.fetchall()
+l = [] 
 for row in rows :
-    probability = {'entertain':1.0,'politics':1.0,'econonics':1.0,'sports':1.0,'education':1.0,'religion':1.0,'health':1.0,}
+    probability = {u'entertain':1.0,u'politics':1.0,u'econonics':1.0,u'sports':1.0,u'education':1.0,u'religion':1.0,u'health':1.0}
 
     cats = json.loads(row[2])
     sents = json.loads(row[4])
@@ -59,20 +61,21 @@ for row in rows :
 
     for cat in categories:
         probability[cat] += -log(counts[cat]/sump)
+	
+    maxi= 999999
 
-
-    maxi= -9999
-    cats = json.loads(row[2])
-    for i in probability :
-        if (probability[i] >=  maxi) :
-            maxi = probability[i]
-            var = i
-    try :
-        category_counts_test[var] +=1
-    except :
-        category_counts_test[var] = 1
-
-
-print counts , category_counts_test
-
+    for prob in  probability :
+	if probability[prob] <= maxi :
+		maxi = probability[prob]
+		var = prob 
+    for i in cats :
+    	l.append([var , i ]) 	
+c =0.0 
+cu =1.0 
+for i in cats :
+	if i[0] == i[1] :
+		c +=1
+	cu +=1
+print  counts , category_counts_test 
+print  (c/ cu )
 
